@@ -1,0 +1,15 @@
+# coding=utf-8
+import pymysql
+
+conn = pymysql.connect(host = 'localhost',port = 3306,user = 'root',password = 'mysqladmin',db = '51jobs',charset = 'utf8')
+cur = conn.cursor()
+try:
+    for i in range(1,200):
+        cur.execute('select id,url,company from jobs where id = %s',(i))# id,url,company
+        result = cur.fetchone()
+        if result is not None:
+            print(result)
+
+finally:
+    cur.close()
+    conn.close()
